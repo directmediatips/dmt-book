@@ -1,3 +1,12 @@
+
+database/*.properties
+google/StoredCredential
+google/*.properties
+google/client_secret.json
+klout/*.properties
+linkedin/*.properties
+twitter/*.properties
+
 # Eclipse
 
 .settings
