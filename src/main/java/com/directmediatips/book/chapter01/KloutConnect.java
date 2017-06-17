@@ -18,8 +18,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.directmediatips.klout.Influence;
 import com.directmediatips.klout.Klout;
 import com.directmediatips.klout.Network;
+import com.directmediatips.klout.Topic;
+import com.directmediatips.klout.User;
 import com.directmediatips.klout.UserId;
 
 public class KloutConnect {
@@ -28,11 +31,32 @@ public class KloutConnect {
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("klout/klout.properties"));
 		Klout klout = new Klout(properties.getProperty("apiKey"));
-		UserId id = new UserId(properties.getProperty("bruno1970"));
+		UserId id = klout.getUserIdFromTwitterScreenName("bruno1970");
+		System.out.println(id);
 		id = klout.getUserId(id, Network.TWITTER);
 		System.out.println(id);
+		id = klout.getUserId(id);
+		System.out.println(id);
+		System.out.println();
 		System.out.println(klout.getUser(id));
-		System.out.println(klout.getInfluence(id));
-		System.out.println(klout.getTopics(id));
+		System.out.println();
+		System.out.println("Influencers:");
+		Influence influence = klout.getInfluence(id);
+		for (User user : influence.getMyInfluencers()) {
+			System.out.println();
+			System.out.println(user);
+		}
+		System.out.println();
+		System.out.println("Influencees:");
+		for (User user : influence.getMyInfluencees()) {
+			System.out.println();
+			System.out.println(user);
+		}
+		System.out.println();
+		System.out.println("Topics:");
+		for (Topic topic: klout.getTopics(id)) {
+			System.out.println();
+			System.out.println(topic);
+		}
 	}
 }
