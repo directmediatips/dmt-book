@@ -43,20 +43,17 @@ public class KloutConnect {
 		System.out.println("Influencers:");
 		Influence influence = klout.getInfluence(id);
 		for (User user : influence.getMyInfluencers()) {
-			System.out.println();
-			System.out.println(user);
+			System.out.println(String.format("%s: %s", user.getNick(), user.getScore()));
 		}
 		System.out.println();
 		System.out.println("Influencees:");
 		for (User user : influence.getMyInfluencees()) {
-			System.out.println();
-			System.out.println(user);
+			System.out.println(String.format("%s: %s", user.getNick(), user.getScore()));
 		}
 		System.out.println();
 		System.out.println("Topics:");
 		for (Topic topic: klout.getTopics(id)) {
-			System.out.println();
-			System.out.println(topic);
+			System.out.println(topic.getDisplayName());
 		}
 	}
 }
